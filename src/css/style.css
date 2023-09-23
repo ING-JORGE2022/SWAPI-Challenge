@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+/* fondo de pantalla de la pagina web */
+body {
+    background-image: url('../img/fondo.jpg'); /*  'ruta imagen' 
+    background-size: cover; /* Esto ajustará automáticamente la imagen al tamaño de la ventana del navegador */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed; /* Fija la imagen para que no se desplace con el contenido */
+    color: white;
+}
+/* logo*/
+.Star-Wars-Logo{
+display: grid;
+place-content: center;
+margin-top: 20px;
+}  
+
+.buttonmusic{
+background-color: rgb(255, 255, 0);
+width: 100px;
+height: 40px;
+border-radius: 50px;
+cursor: pointer;
+}
+.Films{
+    color:white;
+}
+
+.tituloFilms{
+color:white; 
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #d3db34;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Oculta el spinner inicialmente */
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+li {
+    font-family: 'Star Jedi', sans-serif;
+    font-size: 25px;
+    margin-bottom: 10px;
+    position: relative;
+    color: #f0f0f0;
+}
+
+li:hover{
+    color: yellow;
+    cursor: pointer;
+}
+
+
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #333;
+    margin: 10% auto;
+    padding: 20px;
+    width: auto;
+    border-radius: 5px;
+    color: white;
+    max-height: 80vh; /* Limitar la altura máxima del contenido del modal */
+    overflow-y: scroll; /* Agregar desbordamiento vertical para ver más contenido */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.styleinfo{
+    font-family: 'Star Jedi', sans-serif;
+    text-align:justify;
+    display: flex;
+    align-items: stretch;
+    gap:10px;
+    
+    
+}
+.styleinfo .Personajes {
+    font-family: 'Star Jedi', sans-serif;
+    text-align:justify;
+    margin-left: 30px;
+    margin-top: 20px;
+    
+    
+}
+
+.styleinfo h2 {
+    font-size: 24px;
+    text-align: center;
+    margin:10px;
+  }
+
+.containerinfo{
+   margin-top: 20px;
+   font-size: 15px;
+    
+}
+
+.personajes{ 
+    margin-left: 100px;
+    
+    
+}
+
+.informacionPersonajes{
+margin-left: 20px;
+font-size: 20px;
+    
+}
+
+.planet-list{
+    margin-left: 10px;
+}

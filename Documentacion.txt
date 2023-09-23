@@ -1,0 +1,124 @@
+// Variable global para almacenar las películas
+let films;
+
+// Consumo de la API de SWAPI para obtener películas
+async function getFilmsFromApi() {
+  try {
+    // Paso 1: Realiza una solicitud (request) a la API de SWAPI para obtener información sobre películas.
+    const response = await fetch('https://swapi.dev/api/films/');
+
+    // Paso 2: Verifica si la respuesta de la solicitud es exitosa (estado HTTP 200).
+    if (!response.ok) {
+      // Si la respuesta no es exitosa, se lanza un error con detalles sobre el estado y el mensaje.
+      throw new Error(`Error: ${response.status}, message: ${response.statusText}`);
+    }
+
+    // Paso 3: Si la respuesta es exitosa, se convierte la respuesta a formato JSON.
+    const filmsData = await response.json();
+
+    // Paso 4: Se retorna la propiedad 'results' de los datos obtenidos, que contiene la lista de películas.
+    return filmsData.results;
+  } catch (error) {
+    // Paso 5: Si ocurre algún error en cualquiera de los pasos anteriores, se captura el error.
+    console.error(error);
+
+    // Luego, se lanza el mismo error para que quien llame a esta función también pueda manejarlo.
+    throw error;
+  }
+}
+Ahora, vamos a explicar cada uno de los pasos en detalle:
+
+Paso 1: La función fetch se utiliza para realizar una solicitud a una URL específica, en este caso, 'https://swapi.dev/api/films/'. Esta solicitud es asincrónica y devuelve una promesa que eventualmente contendrá la respuesta del servidor.
+
+Paso 2: Una vez que la promesa se resuelve (es decir, se obtiene la respuesta del servidor), se verifica si la propiedad ok de la respuesta es true. Esto se hace para asegurarse de que la respuesta sea exitosa y que no haya errores en la solicitud. Si ok es false, significa que la solicitud no fue exitosa y se lanza un error.
+
+Paso 3: Si la respuesta es exitosa, el siguiente paso es convertir la respuesta en un objeto JavaScript utilizando await response.json(). Esto toma el cuerpo (body) de la respuesta (que generalmente está en formato JSON) y lo convierte en un objeto JavaScript.
+
+Paso 4: Después de que la respuesta se ha convertido con éxito en un objeto JavaScript, se accede a la propiedad results de los datos obtenidos. En el contexto de la API SWAPI, esta propiedad contiene la lista de películas.
+
+Paso 5: En caso de que ocurra algún error en cualquiera de los pasos anteriores, se captura ese error utilizando el bloque try...catch. El error se registra en la consola utilizando console.error, lo que puede ser útil para depurar y encontrar problemas en el código. Luego, se lanza el mismo error nuevamente usando throw error para que cualquier función que haya llamado a getFilmsFromApi también pueda manejar el error si es necesario.
+
+El primer fragmeto de este codigo esta función getFilmsFromApi se encarga de realizar una solicitud a la API de SWAPI para obtener la lista de películas. Si la solicitud es exitosa, devuelve la lista de películas; de lo contrario, lanza un error con detalles sobre el problema. Esta función es asincrónica, lo que significa que puede tomar un tiempo obtener la respuesta de la API, por lo que es común usar await para esperar a que se complete la solicitud antes de continuar con otras operaciones.
+
+
+
+
+informacion // 
+let films es una variable global que se utiliza para almacenar las películas obtenidas de la API de Star Wars.
+
+getFilmsFromApi es una función asincrónica que realiza una solicitud a la API de Star Wars para obtener la lista de películas. 
+Si la solicitud es exitosa, devuelve los resultados de las películas. Si ocurre un error en la solicitud,
+ se captura y registra en la consola antes de lanzar el error.
+
+
+ SEGUNDO FRAGMENTO DE CODIGO 
+ // Función para mostrar la lista de películas
+async function displayFilms() {
+  try {
+    // Paso 1: Obtener referencias a elementos HTML del documento.
+    const filmList = document.getElementById('film-list');
+    const spinner = document.getElementById('spinner');
+
+    // Paso 2: Mostrar el spinner de carga mientras se obtienen los datos.
+    spinner.style.display = 'block';
+
+    // Paso 3: Obtener la lista de películas desde la API mediante una llamada asíncrona.
+    films = await getFilmsFromApi();
+
+    // Paso 4: Limpiar el contenido anterior de la lista de películas.
+    filmList.innerHTML = '';
+
+    // Paso 5: Iterar a través de la lista de películas y crear elementos de lista para cada una.
+    films.forEach((film, index) => {
+      const listItem = document.createElement('li');
+
+      // Paso 6: Establecer el texto del elemento de lista como el título de la película.
+      listItem.textContent = film.title;
+
+      // Paso 7: Agregar una clase 'clickable' para que el elemento sea interactivo.
+      listItem.classList.add('clickable');
+
+      // Paso 8: Agregar un evento de clic al elemento de lista.
+      listItem.addEventListener('click', () => {
+        // Paso 9: Al hacer clic, llamar a las funciones para mostrar información detallada.
+        setFilmInfoInView(index);
+        setFilmCharactersInView(films[index].characters);
+      });
+
+      // Paso 10: Agregar el elemento de lista a la lista de películas en el documento.
+      filmList.appendChild(listItem);
+    });
+
+    // Paso 11: Ocultar el spinner de carga una vez que se han cargado las películas.
+    spinner.style.display = 'none';
+  } catch (error) {
+    // Paso 12: Manejar errores en caso de que algo salga mal y mostrarlos en la consola.
+    console.error(error);
+  }
+}
+
+Paso 1: Se obtienen referencias a elementos HTML del documento utilizando document.getElementById(). En este caso, se obtienen referencias al elemento con id="film-list" y al elemento con id="spinner".
+
+Paso 2: Se muestra un spinner de carga estableciendo el estilo display del elemento spinner en 'block'. Esto indica visualmente que la página está cargando datos.
+
+Paso 3: Se obtiene la lista de películas desde una API mediante una llamada asíncrona a la función getFilmsFromApi. Esta llamada se realiza utilizando la palabra clave await, lo que significa que la ejecución de la función se pausará hasta que se resuelva la promesa devuelta por getFilmsFromApi.
+
+Paso 4: Se limpia el contenido anterior de la lista de películas (filmList) estableciendo su contenido interno (innerHTML) en una cadena vacía. Esto asegura que la lista esté vacía antes de agregar las nuevas películas.
+
+Paso 5: Se itera a través de la lista de películas utilizando films.forEach. Para cada película en la lista, se ejecuta el código dentro de la función de devolución de llamada.
+
+Paso 6: Se crea un nuevo elemento de lista (listItem) que se utilizará para representar una película en la lista. El texto del elemento se establece como el título de la película (film.title).
+
+Paso 7: Se agrega la clase 'clickable' al elemento de lista para que sea interactivo y responda a eventos de clic.
+
+Paso 8: Se agrega un evento de clic al elemento de lista. Cuando se hace clic en una película de la lista, se ejecutarán las funciones setFilmInfoInView y setFilmCharactersInView con los detalles de la película seleccionada.
+
+Paso 9: Cuando se hace clic en un elemento de lista, se llaman a las funciones setFilmInfoInView y setFilmCharactersInView para mostrar información detallada de la película y los personajes relacionados.
+
+Paso 10: Se agrega el elemento de lista a la lista de películas (filmList) en el documento, lo que lo hace visible para el usuario en la interfaz de la página web.
+
+Paso 11: Una vez que se han agregado todas las películas a la lista y se ha completado la carga de datos, se oculta el spinner de carga estableciendo el estilo display del elemento spinner en 'none'.
+
+Paso 12: Se manejan errores utilizando un bloque try...catch. Cualquier error que ocurra durante la ejecución de la función se captura y se muestra en la consola utilizando console.error.
+
+En resumen, la función displayFilms se encarga de obtener la lista de películas desde una API, mostrar un spinner de carga mientras se obtienen los datos, crear una lista interactiva de películas en la interfaz de usuario y permitir que el usuario haga clic en una película para ver información detallada y personajes relacionados.

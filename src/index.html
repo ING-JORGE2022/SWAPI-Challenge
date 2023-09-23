@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>API de SWAPI</title>
+</head>
+<body>
+    <div class="Star-Wars-Logo">
+        <img src="./img/Star-Wars-Logo.png" alt="Star-Wars-Logo" width: 475px; height=200px>
+    </div>
+    <!-- musica de star wars -->
+    <audio id="miAudio" >
+        <source src="./music/cancion-star-wars.mp3" type="audio/mpeg">
+    </audio>
+    <button  class=" buttonmusic"id="playPauseButton">Reproducir 🔊</button>
+    <h1>Lista de Películas de Star Wars</h1>
+    <div id="spinner" class="spinner"></div>
+
+    <ul id="film-list"></ul>
+<!-- lista de las peliculas de star wars -->
+    
+<div id="film-modal" class="modal">
+    <div class="modal-content styleinfo" >
+        <span class="close" id="close-modal">X</span>
+        <h2>Film Information</h2>
+       <div class="containerinfo">
+         <p><strong>Title:</strong> <span id="title"></span></p>
+         <p><strong>Episode:</strong> <span id="episode"></span></p>
+         <p><strong>Director:</strong> <span id="director"></span></p>
+         <p><strong>Release Date:</strong> <span id="release_date"></span></p>
+         <br>
+         <p><strong>Opening crawl:</strong> <span id="opening_crawl"></span></p>
+       </div>
+       <div>
+           <h2>Personajes</h2>
+        <ul id="characters-list" class="personajes">
+            <!-- Aquí se mostrarán los personajes -->
+        </ul>
+    </div>
+    <!-- Contenedor para la información del personaje -->
+    <div id="character-info-container" class="informacionPersonajes">
+        <h2>Caracteristicas Del Personaje</h2>
+        <p>Name: <span id="character-name"></span></p>
+        <p>Height: <span id="character-height"></span></p>
+        <p>Mass: <span id="character-mass"></span></p>
+        <p>Hair Color: <span id="character-hair"></span></p>
+        <p>Skin Color: <span id="character-skin"></span></p>
+        <p>Eye Color: <span id="character-eyes"></span></p>
+        <p>Birth Year: <span id="character-birth-year"></span></p>
+        <p>Gender: <span id="character-gender"></span></p>
+    </div>
+
+    <!-- Lista de Planetas -->
+<div class="planet-list">
+    <h2>Lista de Planetas</h2>
+    <ul id="planets-list">
+      <!-- Los elementos de la lista de planetas se agregarán aquí dinámicamente desde JavaScript -->
+    </ul>
+  </div>
+  
+  <!-- Información detallada de un Planeta -->
+  <div class="planet-info-container hidden" id="planet-info-container">
+    <h2>Información del Planeta</h2>
+    <p>Nombre: <span id="planet-name"></span></p>
+    <p>Periodo de Rotación: <span id="planet-rotation-period"></span></p>
+    <p>Periodo Orbital: <span id="planet-orbital-period"></span></p>
+    <p>Diámetro: <span id="planet-diameter"></span></p>
+    <p>Clima: <span id="planet-climate"></span></p>
+    <p>Territorio: <span id="planet-terrain"></span></p>
+    <p>Población: <span id="planet-population"></span></p>
+  </div>
+  
+    </div>
+    
+</div>
+
+
+
+
+</body>
+<!-- api -->
+<script src="../api/index.js"></script>
+
+<!-- botton sonido script -->
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+    let miAudio = document.getElementById('miAudio');
+    let playPauseButton = document.getElementById('playPauseButton');
+    
+    playPauseButton.addEventListener('click', function () {
+        if (miAudio.paused) {
+        miAudio.play();
+        playPauseButton.textContent = 'Pausar 🔇';
+        } else {
+        miAudio.pause();
+        playPauseButton.textContent = 'Reproducir 🔊';
+        }
+    });
+    });
+</script>
+
+</html>
+
+
+
